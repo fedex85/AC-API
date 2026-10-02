@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Catálogo de climatización</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300789A'/%3E%3Cg fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='7' width='22' height='9' rx='3'/%3E%3Cpath d='M9 12.5h14'/%3E%3Cpath d='M10.5 20.5c-1.4 2-1.4 4 0 6M16 20.5c-1.4 2-1.4 4 0 6M21.5 20.5c-1.4 2-1.4 4 0 6'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body>
+
+<!-- ============ Acceso ============ -->
+<main id="view-login" class="login" hidden>
+  <section class="login-intro" aria-hidden="true">
+    <div class="hvac-art">
+      <svg class="hvac-svg" viewBox="0 0 420 330" role="presentation" focusable="false">
+        <defs>
+          <linearGradient id="g-air" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" class="stop-cool" stop-opacity=".95"/>
+            <stop offset="1" class="stop-cool" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="g-temp" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" class="stop-cool"/>
+            <stop offset=".5" class="stop-mild"/>
+            <stop offset="1" class="stop-warm"/>
+          </linearGradient>
+        </defs>
+        <rect class="hv-unit" x="30" y="24" width="360" height="104" rx="24"/>
+        <rect class="hv-unit-shade" x="30" y="92" width="360" height="36" rx="18"/>
+        <rect class="hv-slot" x="62" y="100" width="296" height="14" rx="7"/>
+        <rect class="hv-flap" x="70" y="108" width="280" height="9" rx="4.5"/>
+        <circle class="hv-led" cx="64" cy="52" r="4"/>
+        <text class="hv-temp" x="356" y="66" text-anchor="end">22°</text>
+        <path class="hv-air hv-air-1" d="M100 122 C 92 168 112 196 100 244"/>
+        <path class="hv-air hv-air-2" d="M160 122 C 152 172 172 204 160 262"/>
+        <path class="hv-air hv-air-3" d="M220 122 C 212 170 232 200 220 252"/>
+        <path class="hv-air hv-air-4" d="M280 122 C 272 172 292 204 280 262"/>
+        <path class="hv-air hv-air-5" d="M340 122 C 332 168 352 196 340 244"/>
+        <g class="hv-flake" transform="translate(58 214)"><path d="M0-9V9M-8-4.5 8 4.5M-8 4.5 8-4.5"/></g>
+        <g class="hv-flake hv-flake-2" transform="translate(366 232) scale(.8)"><path d="M0-9V9M-8-4.5 8 4.5M-8 4.5 8-4.5"/></g>
+        <rect class="hv-bar" x="30" y="296" width="360" height="12" rx="6"/>
+        <circle class="hv-knob" cx="216" cy="302" r="10"/>
+        <text class="hv-lab" x="30" y="324">Frío</text>
+        <text class="hv-lab" x="390" y="324" text-anchor="end">Calor</text>
+      </svg>
+      <ul class="hvac-chips">
+        <li>Split</li><li>Inverter</li><li>Frío y calor</li><li>WiFi</li><li>BTU</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="login-panel">
+    <svg class="logo" viewBox="0 0 32 32" width="40" height="40" aria-hidden="true">
+      <rect class="logo-wave" x="3.5" y="5.5" width="25" height="11" rx="3.5"/>
+      <path class="logo-wave" d="M8 12.5h16"/>
+      <path class="logo-wave" d="M10 21c-1.6 2.2-1.6 4.8 0 7M16 21c-1.6 2.2-1.6 4.8 0 7M22 21c-1.6 2.2-1.6 4.8 0 7"/>
+    </svg>
+    <h1>Catálogo de climatización</h1>
+    <p class="lead">Consulta los equipos, compara capacidad y consumo, y gestiona el catálogo.</p>
+
+    <div class="tabs" role="tablist" aria-label="Acceso">
+      <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="form-login">Iniciar sesión</button>
+      <button type="button" role="tab" id="tab-register" aria-selected="false" aria-controls="form-register" tabindex="-1">Crear cuenta</button>
+    </div>
+
+    <form id="form-login" role="tabpanel" aria-labelledby="tab-login" novalidate>
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" name="email" type="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="login-password">Contraseña</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+    </form>
+
+    <form id="form-register" role="tabpanel" aria-labelledby="tab-register" hidden novalidate>
+      <div class="field">
+        <label for="reg-name">Nombre <span class="opt">(opcional)</span></label>
+        <input id="reg-name" name="full_name" type="text" autocomplete="name" maxlength="120">
+      </div>
+      <div class="field">
+        <label for="reg-email">Email</label>
+        <input id="reg-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="reg-password">Contraseña</label>
+        <input id="reg-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required aria-describedby="reg-password-hint">
+        <p class="hint" id="reg-password-hint">Entre 8 y 72 caracteres.</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
+      <p class="hint">Las cuentas nuevas pueden consultar el catálogo. Solo un administrador puede modificarlo.</p>
+    </form>
+
+    <p id="login-message" class="notice" role="alert" hidden></p>
+  </section>
+</main>
+
+<!-- ============ Catálogo ============ -->
+<div id="view-catalog" hidden>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="logo logo-sm" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <rect class="logo-wave" x="3.5" y="5.5" width="25" height="11" rx="3.5"/>
+      <path class="logo-wave" d="M8 12.5h16"/>
+      <path class="logo-wave" d="M10 21c-1.6 2.2-1.6 4.8 0 7M16 21c-1.6 2.2-1.6 4.8 0 7M22 21c-1.6 2.2-1.6 4.8 0 7"/>
+      </svg>
+      <span class="brand-name">Catálogo de climatización</span>
+    </div>
+    <div class="session">
+      <span id="me-email" class="me-email"></span>
+      <span id="me-role" class="role"></span>
+      <button type="button" id="btn-logout" class="btn btn-quiet">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="filters" id="filters" aria-label="Filtros">
+      <form id="form-filters" novalidate>
+        <div class="field">
+          <label for="f-brand">Marca</label>
+          <input id="f-brand" type="search" autocomplete="off" placeholder="Daikin, LG, Samsung…">
+        </div>
+
+        <div class="field">
+          <label for="f-type">Tipo de equipo</label>
+          <select id="f-type"></select>
+        </div>
+
+        <fieldset class="field scale-field">
+          <legend>Eficiencia energética</legend>
+          <div class="scale" id="scale"></div>
+        </fieldset>
+
+        <fieldset class="field pair">
+          <legend>Capacidad (BTU)</legend>
+          <input id="f-btu-min" type="number" min="0" step="500" inputmode="numeric" placeholder="Desde" aria-label="Capacidad mínima en BTU">
+          <input id="f-btu-max" type="number" min="0" step="500" inputmode="numeric" placeholder="Hasta" aria-label="Capacidad máxima en BTU">
+        </fieldset>
+
+        <fieldset class="field pair">
+          <legend id="legend-price">Precio</legend>
+          <input id="f-price-min" type="number" min="0" step="10" inputmode="decimal" placeholder="Desde" aria-label="Precio mínimo">
+          <input id="f-price-max" type="number" min="0" step="10" inputmode="decimal" placeholder="Hasta" aria-label="Precio máximo">
+        </fieldset>
+
+        <div class="field">
+          <label for="f-available">Disponibilidad</label>
+          <select id="f-available">
+            <option value="">Todos</option>
+            <option value="true">Con stock</option>
+            <option value="false">Sin stock o no disponibles</option>
+          </select>
+        </div>
+
+        <fieldset class="field checks">
+          <legend>Características</legend>
+          <label class="check"><input type="checkbox" id="f-inverter"> Inverter</label>
+          <label class="check"><input type="checkbox" id="f-heating"> Calefacción</label>
+          <label class="check"><input type="checkbox" id="f-wifi"> WiFi</label>
+        </fieldset>
+
+        <button type="button" id="btn-reset" class="btn btn-quiet">Quitar filtros</button>
+      </form>
+    </aside>
+
+    <main class="results" id="results">
+      <div class="results-head">
+        <div>
+          <h1 class="results-title" id="result-count" aria-live="polite">Equipos</h1>
+        </div>
+        <div class="results-tools">
+          <button type="button" id="btn-filters" class="btn btn-secondary filters-toggle" aria-expanded="false" aria-controls="filters">Filtros</button>
+          <div class="inline-field field-sort">
+            <label for="f-sort">Ordenar por</label>
+            <select id="f-sort"></select>
+          </div>
+          <div class="inline-field field-size">
+            <label for="f-size">Por página</label>
+            <select id="f-size">
+              <option>10</option><option selected>25</option><option>50</option><option>100</option>
+            </select>
+          </div>
+          <button type="button" id="btn-new" class="btn btn-primary" hidden>Añadir equipo</button>
+        </div>
+      </div>
+
+      <p id="banner" class="notice notice-error" role="alert" hidden></p>
+
+      <div class="table-wrap" id="table-wrap" aria-busy="false">
+        <table class="grid">
+          <caption class="sr-only">Equipos del catálogo</caption>
+          <thead>
+            <tr>
+              <th scope="col">Equipo</th>
+              <th scope="col">Tipo</th>
+              <th scope="col" class="num">Capacidad</th>
+              <th scope="col" class="num">Consumo</th>
+              <th scope="col" class="num">Superficie</th>
+              <th scope="col">Eficiencia</th>
+              <th scope="col" class="num">Precio</th>
+              <th scope="col">Estado</th>
+              <th scope="col" class="col-actions"><span class="sr-only">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div id="empty" class="empty" hidden></div>
+      </div>
+
+      <nav class="pager" id="pager" aria-label="Paginación" hidden>
+        <p id="pager-info" class="pager-info"></p>
+        <div class="pager-btns">
+          <button type="button" id="btn-prev" class="btn btn-secondary">Anterior</button>
+          <span id="pager-page" class="pager-page"></span>
+          <button type="button" id="btn-next" class="btn btn-secondary">Siguiente</button>
+        </div>
+      </nav>
+
+      <p class="foot">Referencia técnica de la API en <a href="/docs">/docs</a>.</p>
+    </main>
+  </div>
+</div>
+
+<!-- ============ Diálogos ============ -->
+<dialog id="dlg-form" aria-labelledby="dlg-form-title">
+  <form id="form-ac" method="dialog" novalidate>
+    <header class="dlg-head">
+      <h2 id="dlg-form-title">Añadir equipo</h2>
+      <button type="button" class="btn btn-quiet" data-close aria-label="Cerrar">Cerrar</button>
+    </header>
+    <div class="dlg-body">
+      <p id="form-error" class="notice notice-error" role="alert" hidden></p>
+      <div id="form-fields" class="form-grid"></div>
+    </div>
+    <footer class="dlg-foot">
+      <button type="button" class="btn btn-secondary" data-close>Cancelar</button>
+      <button type="submit" class="btn btn-primary" id="btn-save">Guardar equipo</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog id="dlg-delete" aria-labelledby="dlg-delete-title">
+  <form method="dialog" id="form-delete">
+    <header class="dlg-head">
+      <h2 id="dlg-delete-title">Eliminar equipo</h2>
+    </header>
+    <div class="dlg-body">
+      <p id="delete-text"></p>
+      <p id="delete-error" class="notice notice-error" role="alert" hidden></p>
+    </div>
+    <footer class="dlg-foot">
+      <button type="button" class="btn btn-secondary" data-close>Cancelar</button>
+      <button type="submit" class="btn btn-danger" id="btn-confirm-delete">Eliminar equipo</button>
+    </footer>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
